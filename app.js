@@ -183,7 +183,7 @@ try{
 
 const response = await fetch(
 
-`http://localhost:5002/api/chats/${userId}/${chatId}`
+`https://chatbot-backend-sduw.onrender.com/${userId}/${chatId}`
 
 );
 
