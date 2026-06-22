@@ -8,61 +8,81 @@
 
 <body>
 
-    <div class="container">
-
-        <div class="header">
-            AI Event Planner 🤖
-        </div>
-
-       <div id="chatBox" class="chat-box"></div>
+<div class="app">
 
 
-<div class="category-box">
+<div class="sidebar">
 
-<button onclick="selectEvent('Birthday Party')">
-🎂 Birthday
+
+<h2>🤖 AI Event Planner</h2>
+
+
+<button onclick="newChat()">
++ New Chat
 </button>
 
 
-<button onclick="selectEvent('Wedding')">
-💍 Wedding
-</button>
+<h3>Chat History</h3>
 
 
-<button onclick="selectEvent('Corporate Event')">
-🏢 Corporate
-</button>
+<div id="history"></div>
 
 
-<button onclick="selectEvent('College Event')">
-🎓 College Event
-</button>
+
+
 
 </div>
 
-       <div class="input-area">
 
-<input
+
+
+
+<div class="chat-app">
+
+
+<div class="header">
+
+AI Event Planner 🤖
+
+</div>
+
+
+
+<div id="chatBox"
+class="chat-box">
+
+
+</div>
+
+
+
+<div class="input-area">
+
+
+<input 
 id="messageInput"
-placeholder="Type your event details">
+placeholder="Ask your event plan...">
+
 
 <button onclick="sendMessage()">
-Send
+
+➤
+
 </button>
 
-<button onclick="clearChat()">
-Clear
-</button>
-
-<button onclick="downloadPlan()">
-📥 Download Plan
-</button>
 
 </div>
 
-        </div>
 
-    </div>
+</div>
+
+
+
+</div>
+
+
+    
+
 
     <script src="app.js"></script>
 
