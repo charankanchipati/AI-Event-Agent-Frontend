@@ -120,7 +120,7 @@ try{
 
 const res = await axios.get(
 
-`http://localhost:5002/api/chats/${userId}/${id}`
+`https://ai-event-agent-gqnk.onrender.com/api/chats/${userId}/${id}`
 
 );
 
