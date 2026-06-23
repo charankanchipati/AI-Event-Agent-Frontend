@@ -36,7 +36,7 @@ try{
 
 const res = await axios.post(
 
-"http://localhost:5002/api/auth/register",
+"https://ai-event-agent-gqnk.onrender.com/api/auth/register",
 
 {
 
