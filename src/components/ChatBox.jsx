@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 
-function ChatBox({setMemory}){
+function ChatBox(){
 
 
 const [message,setMessage] = useState("");
@@ -11,18 +11,10 @@ const [messages,setMessages] = useState([]);
 
 const [status,setStatus] = useState("Ready 🟢");
 
+
 const chatEndRef = useRef(null);
-useEffect(()=>{
 
 
-chatEndRef.current?.scrollIntoView({
-
-behavior:"smooth"
-
-});
-
-
-},[messages]);
 
 const userId =
 localStorage.getItem("userId");
@@ -60,16 +52,39 @@ return id;
 
 
 
+// AUTO SCROLL
+
+useEffect(()=>{
+
+
+chatEndRef.current?.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+
+},[messages]);
+
+
+
+
+
+// SEND MESSAGE
 
 async function sendMessage(){
 
 
-if(!message.trim())
-return;
+if(!message.trim()) return;
 
 
 
-const userText = message;
+const userMessage = message;
+
+
+
+// show user message immediately
+
 setMessages(prev=>[
 
 ...prev,
@@ -78,56 +93,11 @@ setMessages(prev=>[
 
 role:"user",
 
-text:userText
+text:userMessage
 
 }
 
-]); 
-
-
-
-const lower =
-userText.toLowerCase();
-
-
-
-setMemory(prev=>({
-
-
-event:
-lower.includes("birthday")
-?
-"Birthday"
-:
-prev.event,
-
-
-guests:
-lower.includes("50")
-?
-"50"
-:
-prev.guests,
-
-
-budget:
-lower.includes("50000")
-?
-"₹50000"
-:
-prev.budget,
-
-
-location:
-lower.includes("hyderabad")
-?
-"Hyderabad"
-:
-prev.location
-
-
-
-}));
+]);
 
 
 
@@ -138,26 +108,13 @@ setMessage("");
 try{
 
 
-setStatus("Thinking 🤔");
+setStatus("Thinking 🤖");
 
 
 
-await new Promise(
-resolve=>setTimeout(resolve,800)
-);
+const response = await axios.post(
 
-
-
-setStatus("Planning 📋");
-
-
-
-const response =
-await axios.post(
-
-"https://ai-agent-frontend-4jx7.onrender.com/api/chat",
-// "http://localhost:5002/api/chat",
-
+"http://localhost:5002/api/chat",
 
 {
 
@@ -165,11 +122,13 @@ userId:userId,
 
 chatId:chatId,
 
-message:userText
+message:userMessage
 
 }
 
 );
+
+
 
 
 
@@ -181,7 +140,8 @@ setMessages(prev=>[
 
 role:"assistant",
 
-text:response.data.reply
+text:
+response.data.reply || "No response"
 
 }
 
@@ -189,15 +149,7 @@ text:response.data.reply
 
 
 
-setStatus("Completed ✅");
-
-
-
-setTimeout(()=>{
-
 setStatus("Ready 🟢");
-
-},2000);
 
 
 
@@ -206,11 +158,13 @@ setStatus("Ready 🟢");
 catch(error){
 
 
-console.log(error);
+console.log(
 
+"Chat Error:",
 
+error
 
-setStatus("Error ❌");
+);
 
 
 
@@ -229,13 +183,15 @@ text:"AI service unavailable"
 ]);
 
 
+
+setStatus("Error 🔴");
+
+
 }
 
 
 
 }
-
-
 
 
 
@@ -245,6 +201,7 @@ return(
 
 
 <div className="chat-container">
+
 
 
 <h3>
@@ -262,6 +219,8 @@ Agent Status:
 
 
 
+
+
 <div className="messages">
 
 
@@ -275,23 +234,44 @@ messages.map((msg,index)=>(
 key={index}
 
 className={
+
 msg.role==="user"
+
 ?
+
 "user-msg"
+
 :
+
 "bot-msg"
+
 }
+
 
 >
 
-{msg.text.split("\n").map((line,index)=>(
 
-<p key={index}>
+{
+
+(msg.text || "")
+
+.split("\n")
+
+.map((line,i)=>(
+
+
+<p key={i}>
 
 {line}
 
 </p>
-))}
+
+
+))
+
+}
+
+
 
 </div>
 
@@ -300,11 +280,17 @@ msg.role==="user"
 
 
 }
+
+
+
 <div ref={chatEndRef}></div>
 
 
 
 </div>
+
+
+
 
 
 
@@ -319,8 +305,23 @@ value={message}
 
 
 onChange={(e)=>
+
 setMessage(e.target.value)
+
 }
+
+
+onKeyDown={(e)=>{
+
+
+if(e.key==="Enter"){
+
+sendMessage();
+
+}
+
+
+}}
 
 
 placeholder="Ask your event plan..."
@@ -329,14 +330,20 @@ placeholder="Ask your event plan..."
 
 
 
+
 <button onClick={sendMessage}>
 
+
 Send
+
 
 </button>
 
 
+
 </div>
+
+
 
 
 
@@ -349,4 +356,5 @@ Send
 }
 
 
-export default ChatBox; 
+
+export default ChatBox;
