@@ -156,6 +156,8 @@ const response =
 await axios.post(
 
 "https://ai-event-agent-gqnk.onrender.com/api/chat",
+// "http://localhost:5002/api/chat",
+
 
 {
 
