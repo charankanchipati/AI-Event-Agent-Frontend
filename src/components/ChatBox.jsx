@@ -230,7 +230,7 @@ try{
 
 const res = await axios.post(
 
-"https://ai-event-agent-frontend.onrender.com//api/chat",
+"https://ai-event-agent-frontend.onrender.com/api/chat",
 
 {
 
