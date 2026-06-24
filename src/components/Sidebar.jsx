@@ -26,7 +26,7 @@ try{
 
 const res = await axios.get(
 
-`http://localhost:5002/api/chats/${userId}`
+`https://ai-event-agent-gqnk.onrender.com//api/chats/${userId}`
 
 );
 

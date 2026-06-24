@@ -14,7 +14,8 @@ const [password,setPassword] = useState("");
 
 const navigate = useNavigate();
 
-
+// const API =
+// "https://ai-event-agent-gqnk.onrender.com";
 
 async function login(){
 
@@ -23,7 +24,7 @@ try{
 
 const res = await axios.post(
 
-"https://ai-event-agent-gqnk.onrender.com/api/auth/login",
+ "https://ai-event-agent-gqnk.onrender.com/api/auth/login",
 
 {
 

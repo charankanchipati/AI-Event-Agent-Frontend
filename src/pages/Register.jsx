@@ -15,7 +15,8 @@ const [phone,setPhone]=useState("");
 const [password,setPassword]=useState("");
 
 const [confirmPassword,setConfirmPassword]=useState("");
-
+const API =
+"https://ai-event-agent-gqnk.onrender.com";
 
 
 
@@ -36,7 +37,7 @@ try{
 
 const res = await axios.post(
 
-"https://ai-event-agent-gqnk.onrender.com/api/auth/register",
+`${API}/api/auth/register`,
 
 {
 

@@ -230,7 +230,7 @@ try{
 
 const res = await axios.post(
 
-"http://localhost:5002/api/chat",
+"https://ai-event-agent-gqnk.onrender.com//api/chat",
 
 {
 
