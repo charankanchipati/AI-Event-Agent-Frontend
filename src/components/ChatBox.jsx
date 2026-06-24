@@ -4,7 +4,7 @@ import axios from "axios";
 
 function ChatBox(){
 
-
+const [agentStatus,setAgentStatus] = useState("🟢 Ready");
 const [message,setMessage]=useState("");
 
 const [messages,setMessages]=useState([]);
@@ -195,7 +195,7 @@ loadOldChat
 
 async function sendMessage(){
 
-
+setAgentStatus("🟡 Thinking...");
 if(!message.trim())
 return;
 
@@ -281,7 +281,7 @@ new Event("chatUpdated")
 );
 
 
-
+setAgentStatus("🟢 Ready");
 
 }
 
@@ -294,7 +294,7 @@ console.log(error);
 }
 
 
-
+setAgentStatus("🔴 Error");
 }
 
 
@@ -318,7 +318,7 @@ return(
 <h3>
 
 Agent Status:
-<span>🟢 Ready</span>
+<span>{agentStatus}</span>
 
 </h3>
 
