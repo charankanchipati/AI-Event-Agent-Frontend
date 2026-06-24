@@ -287,7 +287,7 @@ setAgentStatus("🟢 Ready");
 
 catch(error){
 
-setAgentStatus("🔴 Error");
+
 console.log(error);
 
 
